@@ -1,0 +1,65 @@
+<h2 class="mb-3 text-center">Profession table</h2>
+<table datatable [dtOptions]="dtOptions" class="row-border hover">
+  <thead>
+  <tr>
+    <td></td>
+    <th *ngFor="let desc of professionTable.colsDesc" bgcolor="#d3d3d3" scope="col">{{desc}}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let row of professionTable.matrix; let i = index;  trackBy: trackByIdx;">
+    <th bgcolor="#d3d3d3" scope="row">{{professionTable.rowsDesc[i]}}</th>
+    <th *ngFor="let col of row; let j = index; trackBy: trackByIdx;">
+      <input type="number" class="input-group" [(ngModel)]="professionTable.matrix[i][j]" value="{{col}}">
+    </th>
+  </tr>
+  </tbody>
+</table>
+
+
+<h2 class="mt-5 mb-3 pl-3 text-center">Candidates table</h2>
+<table datatable [dtOptions]="dtOptions" class="row-border hover">
+  <thead>
+  <tr>
+    <td></td>
+    <th *ngFor="let desc of candidatesTable.colsDesc" bgcolor="#d3d3d3" scope="col">{{desc}}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let row of candidatesTable.matrix; let i = index">
+    <th bgcolor="#d3d3d3" scope="row">{{candidatesTable.rowsDesc[i]}}</th>
+    <th *ngFor="let col of row; let j = index; trackBy: trackByIdx;">
+      <input type="number" class="input-group" [(ngModel)]="candidatesTable.matrix[i][j]" value="{{col}}">
+    </th>
+  </tr>
+  </tbody>
+</table>
+
+<div class="btns mt-5 d-flex justify-content-center">
+  <button class="btn btn-lg btn-primary" (click)="calculateResultsMaxMin()">Calculate max-min</button>
+  <button class="btn btn-lg btn-primary ml-4" (click)="calculateResultsMaxProd()">Calculate max-prod</button>
+</div>
+
+<div *ngIf="showResults" class="mt-5">
+
+  <h2 class="mt-5 mb-3 pl-3 text-center">Result table</h2>
+  <table datatable [dtOptions]="dtOptions" class="row-border hover">
+    <thead>
+    <tr>
+      <td></td>
+      <th *ngFor="let desc of resultTable.colsDesc" bgcolor="#d3d3d3" scope="col">{{desc}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let row of resultTable.matrix; let i = index">
+      <th bgcolor="#d3d3d3" scope="row">{{resultTable.rowsDesc[i]}}</th>
+      <th *ngFor="let col of row">{{col}}</th>
+    </tr>
+    </tbody>
+  </table>
+
+
+  <div class="pt-4 pb-4 mt-5 mb-2 charts">
+    <app-results [resultTable]="resultTable"></app-results>
+  </div>
+</div>
