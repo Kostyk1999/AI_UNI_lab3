@@ -90,4 +90,8 @@ export class Lab3Component implements OnInit {
   trackByIdx(index: number, obj: any) {
     return index;
   }
+
+  clear() {
+    this.showResults = false;
+  }
 }
